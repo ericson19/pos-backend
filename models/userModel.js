@@ -23,42 +23,48 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 const Store = require("./storesModel");
 
-const User = sequelize.define("User", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: false,
-  },
-  storeId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    references: {
-      model: Store,
-      key: "id",
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+    },
+    storeId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: Store,
+        key: "id",
+      },
+    },
+
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    role: {
+      type: DataTypes.ENUM("admin", "staff", "client"),
     },
   },
-
-  isActive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true,
+  {
+    tableName: "users",
   },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  role: {
-    type: DataTypes.ENUM("admin", "staff", "client"),
-  },
-});
+);
 User.belongsTo(Store, { foreignKey: "storeId" });
 Store.hasMany(User, { foreignKey: "storeId" });
 module.exports = User;
