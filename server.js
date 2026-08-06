@@ -31,14 +31,14 @@ const otpCleanup = require("./cron/otpCleanup");
 const app = express();
 
 //test DB connection and sync
-try {
-  sequelize.sync();
-  console.log("All models were synchronized successfully.");
-} catch (error) {
-  console.error("Unable to synchronize the models:", error);
-}
+// try {
+//   sequelize.sync();
+//   console.log("All models were synchronized successfully.");
+// } catch (error) {
+//   console.error("Unable to synchronize the models:", error);
+// }
 
-// Schedule OTP cleanup every hour
+// // Schedule OTP cleanup every hour
 cron.schedule("0 0 * * *", otpCleanup);
 
 // expose my API to frontend
