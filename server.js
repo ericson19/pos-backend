@@ -79,13 +79,13 @@ app.get("/health", (req, res) => {
   });
 });
 
-//serve React frontend
-app.use(express.static(path.join(__dirname, "../pos-frontend/dist")));
+// //serve React frontend
+// app.use(express.static(path.join(__dirname, "../pos-frontend/dist")));
 
-// Handle all other routes and serve the React frontend
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "../pos-frontend/dist", "index.html"));
-});
+// // Handle all other routes and serve the React frontend
+// app.use((req, res) => {
+//   res.sendFile(path.join(__dirname, "../pos-frontend/dist", "index.html"));
+// });
 // Test route
 app.use("/", (req, res) => {
   res.send("API is running...");
