@@ -26,6 +26,7 @@ const viewCategory = async (req, res) => {
     });
     res.status(201).json({ message: "categories fetched", categories });
   } catch (error) {
+    console.error("Error fetching categories:", error);
     res.status(500).json({ message: error.message });
   }
 };
