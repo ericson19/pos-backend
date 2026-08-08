@@ -29,7 +29,7 @@ exports.regClient = async (req, res) => {
       res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.SAMESITE || "none",
+        sameSite: process.env.SAMESITE,
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
       res.status(201).json({
