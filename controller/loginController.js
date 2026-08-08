@@ -5,6 +5,7 @@ const Store = require("../models/storesModel");
 // const generateToken = require("../utils/generateToken");
 const Permission = require("../models/userPermission");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 require("dotenv").config();
 
 const loginController = async (req, res, next) => {
@@ -39,7 +40,8 @@ const loginController = async (req, res, next) => {
 
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: true,
+        path: "/",
         sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
@@ -71,7 +73,8 @@ const logoutController = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
+      path: "/",
       sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
